@@ -2,6 +2,8 @@ package io.mochadwi.movieapp.feature.movie.popular.ui.presenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.mochadwi.movieapp.feature.core.interactor.DefaultObserver;
 import io.mochadwi.movieapp.feature.movie.popular.domain.interactor.GetPopular;
 import io.mochadwi.movieapp.feature.movie.popular.domain.model.Popular;
@@ -11,6 +13,7 @@ public class PopularPresenter {
     // TODO: Adjust your needs here
     private GetPopular getPopularUseCase;
 
+    @Inject
     public PopularPresenter(
         GetPopular getPopularUseCase) {
         this.getPopularUseCase = getPopularUseCase;

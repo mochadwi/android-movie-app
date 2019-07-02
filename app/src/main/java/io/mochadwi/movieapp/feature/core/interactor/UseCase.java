@@ -15,6 +15,7 @@
  */
 package io.mochadwi.movieapp.feature.core.interactor;
 
+import androidx.annotation.Nullable;
 import dagger.internal.Preconditions;
 import io.mochadwi.movieapp.feature.core.executor.PostExecutionThread;
 import io.mochadwi.movieapp.feature.core.executor.ThreadExecutor;
@@ -33,7 +34,7 @@ import io.reactivex.schedulers.Schedulers;
  * {@link DisposableObserver}
  * that will execute its job in a background thread and will post the result in the UI thread.
  */
-public abstract class UseCase<T, Params> {
+public abstract class UseCase<T, P> {
 
     private final CompositeDisposable disposables;
 
@@ -51,10 +52,10 @@ public abstract class UseCase<T, Params> {
      * Executes the current use case.
      *
      * @param observer {@link DisposableObserver} which will be listening to the observable build
-     *                 by {@link #buildUseCaseObservable(Params)} ()} method.
+     *                 by {@link #buildUseCaseObservable(P)} ()} method.
      * @param params   Parameters (Optional) used to build/execute this use case.
      */
-    public void execute(DisposableObserver<T> observer, Params params) {
+    public void execute(DisposableObserver<T> observer, @Nullable P params) {
         Preconditions.checkNotNull(observer);
         final Observable<T> observable = this.buildUseCaseObservable(params)
             .subscribeOn(Schedulers.from(threadExecutor))
@@ -65,7 +66,7 @@ public abstract class UseCase<T, Params> {
     /**
      * Builds an {@link Observable} which will be used when executing the current {@link UseCase}.
      */
-    public abstract Observable<T> buildUseCaseObservable(Params params);
+    public abstract Observable<T> buildUseCaseObservable(P params);
 
     /**
      * Dispose from current {@link CompositeDisposable}.
