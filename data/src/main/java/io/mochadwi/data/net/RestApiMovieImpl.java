@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.mochadwi.data.entity.MovieEntity;
 import io.mochadwi.data.entity.mapper.MovieEntityJsonMapper;
+import io.mochadwi.data.exception.NetworkConnectionException;
 import io.reactivex.Observable;
 
 /**
@@ -36,29 +37,30 @@ public class RestApiMovieImpl implements RestApiMovie {
 
     @Override
     public Observable<List<MovieEntity>> movieEntityList() {
-        return null;
-//        Observable.create(emitter -> {
-//            if (isThereInternetConnection()) {
-//                try {
-//                    String responseMovieEntities = getMovieEntitiesFromApi();
-//
-//                    if (responseMovieEntities != null) {
-//                        emitter.onNext(movieEntityJsonMapper.transformMovieEntityCollection(
-//                            responseMovieEntities
-//                        ));
-//
-//                        emitter.onComplete();
-//                    } else {
-//                        emitter.onError(new NetworkConnectionException());
-//                    }
-//                } catch (Exception e) {
-//                    // TODO(mochamadiqbaldwicahyo): 2019-07-15 Fix this generic exception
-//                    emitter.onError(new NetworkConnectionException(e.getCause()));
-//                }
-//            } else {
-//                emitter.onError(new NetworkConnectionException(e.getCause()));
-//            }
-//        });
+        return Observable.create(emitter -> {
+            if (isThereInternetConnection()) {
+                try {
+                    String responseMovieEntities = getMovieEntitiesFromApi();
+
+                    if (responseMovieEntities != null) {
+                        emitter.onNext(
+                            movieEntityJsonMapper.transformMovieEntityCollection(
+                                responseMovieEntities
+                            ));
+
+                        emitter.onComplete();
+                    } else {
+                        emitter.onError(new NetworkConnectionException());
+                    }
+                } catch (Exception e) {
+                    // TODO(mochamadiqbaldwicahyo): 2019-07-15 Fix this generic
+                    //  exception
+                    emitter.onError(new NetworkConnectionException(e.getCause()));
+                }
+            } else {
+                emitter.onError(new NetworkConnectionException());
+            }
+        });
     }
 
     @Override
