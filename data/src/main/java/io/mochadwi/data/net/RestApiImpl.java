@@ -3,12 +3,14 @@ package io.mochadwi.data.net;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import java.net.MalformedURLException;
+import java.util.List;
+
 import io.mochadwi.data.entity.UserEntity;
 import io.mochadwi.data.entity.mapper.UserEntityJsonMapper;
 import io.mochadwi.data.exception.NetworkConnectionException;
 import io.reactivex.Observable;
-import java.net.MalformedURLException;
-import java.util.List;
 
 /**
  * {@link RestApi} implementation for retrieving data from the network.
@@ -73,10 +75,6 @@ public class RestApiImpl implements RestApi {
     });
   }
 
-  private String getUserEntitiesFromApi() throws MalformedURLException {
-    return ApiConnection.createGET(API_URL_GET_USER_LIST).requestSyncCall();
-  }
-
   private String getUserDetailsFromApi(int userId) throws MalformedURLException {
     String apiUrl = API_URL_GET_USER_DETAILS + userId + ".json";
     return ApiConnection.createGET(apiUrl).requestSyncCall();
@@ -96,5 +94,9 @@ public class RestApiImpl implements RestApi {
     isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
 
     return isConnected;
+  }
+
+  private String getUserEntitiesFromApi() throws MalformedURLException {
+    return ApiConnection.createGET(API_URL_GET_USER_LIST).requestSyncCall();
   }
 }
