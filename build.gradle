@@ -5,10 +5,14 @@ buildscript {
   repositories {
     jcenter()
     mavenCentral()
+    maven {
+      url 'https://maven.google.com/'
+      name 'Google'
+    }
+    google()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.2'
-    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    classpath 'com.android.tools.build:gradle:3.4.2'
   }
 }
 
@@ -20,6 +24,14 @@ allprojects {
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     testApplicationId = 'io.mochadwi.presentation.test'
   }
+}
+
+repositories {
+  maven {
+    url 'https://maven.google.com/'
+    name 'Google'
+  }
+  google()
 }
 
 task runDomainUnitTests(dependsOn: [':domain:test']) {
