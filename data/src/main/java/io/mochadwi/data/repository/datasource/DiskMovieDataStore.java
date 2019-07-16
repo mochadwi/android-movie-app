@@ -3,6 +3,7 @@ package io.mochadwi.data.repository.datasource;
 import java.util.List;
 
 import io.mochadwi.data.cache.MovieCache;
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 import io.reactivex.Observable;
 
@@ -24,6 +25,12 @@ class DiskMovieDataStore implements MovieDataStore {
 
     @Override
     public Observable<List<MovieEntity>> movieEntityList() {
+        //TODO: implement simple cache for storing/retrieving collections of movies.
+        throw new UnsupportedOperationException("Operation is not available!!!");
+    }
+
+    @Override
+    public Observable<BaseEntity<MovieEntity>> popularList() {
         //TODO: implement simple cache for storing/retrieving collections of movies.
         throw new UnsupportedOperationException("Operation is not available!!!");
     }

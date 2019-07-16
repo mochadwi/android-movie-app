@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 import io.mochadwi.data.entity.mapper.MovieEntityJsonMapper;
 import io.mochadwi.data.exception.NetworkConnectionException;
@@ -47,6 +48,33 @@ public class RestApiMovieImpl implements RestApiMovie {
                             movieEntityJsonMapper.transformMovieEntityCollection(
                                 responseMovieEntities
                             ));
+
+                        emitter.onComplete();
+                    } else {
+                        emitter.onError(new NetworkConnectionException());
+                    }
+                } catch (Exception e) {
+                    // TODO(mochamadiqbaldwicahyo): 2019-07-15 Fix this generic
+                    //  exception
+                    emitter.onError(new NetworkConnectionException(e.getCause()));
+                }
+            } else {
+                emitter.onError(new NetworkConnectionException());
+            }
+        });
+    }
+
+    @Override
+    public Observable<BaseEntity<MovieEntity>> popularList() {
+        return Observable.create(emitter -> {
+            if (isThereInternetConnection()) {
+                try {
+                    String responseMovieEntities = getMovieEntitiesFromApi();
+
+                    if (responseMovieEntities != null) {
+                        emitter.onNext(movieEntityJsonMapper.transformPopularCollection(
+                            responseMovieEntities
+                        ));
 
                         emitter.onComplete();
                     } else {

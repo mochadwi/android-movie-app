@@ -2,8 +2,8 @@ package io.mochadwi.data.net;
 
 import java.util.List;
 
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
-import io.mochadwi.data.entity.UserEntity;
 import io.reactivex.Observable;
 
 /**
@@ -14,14 +14,19 @@ public interface RestApiMovie {
     String API_BASE_URL =
         "https://api.themoviedb.org/3/";
 
-    /** Api url for getting all users */
+    /** Api url for getting all movies */
     String API_URL_GET_MOVIE_POPULAR_LIST = API_BASE_URL + "movie/popular";
 
     /**
-     * Retrieves an {@link Observable} which will emit a List of {@link UserEntity}.
+     * Retrieves an {@link Observable} which will emit a List of {@link MovieEntity}.
      */
     Observable<List<MovieEntity>> movieEntityList();
 
+    /**
+     * Retrieves an {@link Observable} which will emit a List of {@link MovieEntity}.
+     */
+    Observable<BaseEntity<MovieEntity>> popularList();
+    
     /**
      * Retrieves an {@link Observable} which will emit a {@link MovieEntity}.
      *

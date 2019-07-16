@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 import io.mochadwi.domain.Movie;
 
@@ -39,6 +40,23 @@ public class MovieEntityDataMapper {
     }
 
     /**
+     * Transform a List of {@link MovieEntity} into a Collection of {@link Movie}.
+     *
+     * @param movieEntityCollection Object Collection to be transformed.
+     * @return {@link Movie} if valid {@link MovieEntity} otherwise null.
+     */
+    public List<Movie> transform(BaseEntity<MovieEntity> movieEntityCollection) {
+        final List<Movie> movieList = new ArrayList<>(20);
+        for (MovieEntity movieEntity : movieEntityCollection.getResults()) {
+            final Movie movie = transform(movieEntity);
+            if (movie != null) {
+                movieList.add(movie);
+            }
+        }
+        return movieList;
+    }
+
+    /**
      * Transform a {@link MovieEntity} into an {@link Movie}.
      *
      * @param movieEntity Object to be transformed.
@@ -47,12 +65,13 @@ public class MovieEntityDataMapper {
     public Movie transform(MovieEntity movieEntity) {
         Movie movie = null;
         if (movieEntity != null) {
-            movie = new Movie(movieEntity.getMovieId());
-            movie.setCoverUrl(movieEntity.getCoverUrl());
-            movie.setFullName(movieEntity.getFullname());
-            movie.setDescription(movieEntity.getDescription());
-            movie.setFollowers(movieEntity.getFollowers());
-            movie.setEmail(movieEntity.getEmail());
+            movie = new Movie(movieEntity.isAdult(), movieEntity.getBackdropPath(),
+                movieEntity.getGenreIds(),
+                movieEntity.getId(), movieEntity.getOriginalLanguage(),
+                movieEntity.getOriginalTitle(),
+                movieEntity.getOverview(), movieEntity.getPopularity(), movieEntity.getPosterPath(),
+                movieEntity.getReleaseDate(), movieEntity.getTitle(), movieEntity.isVideo(),
+                movieEntity.getVoteAverage(), movieEntity.getVoteCount());
         }
         return movie;
     }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 
 /**
@@ -48,5 +49,19 @@ public class MovieEntityJsonMapper {
         final Type listOfMovieEntityType = new TypeToken<List<MovieEntity>>() {
         }.getType();
         return this.gson.fromJson(movieListJsonResponse, listOfMovieEntityType);
+    }
+
+    /**
+     * Transform from valid json string to List of {@link MovieEntity}.
+     *
+     * @param movieListJsonResponse A json representing a collection of movies.
+     * @return A {@link BaseEntity<MovieEntity>}.
+     * @throws JsonSyntaxException if the json string is not a valid json structure.
+     */
+    public BaseEntity<MovieEntity> transformPopularCollection(String movieListJsonResponse)
+        throws JsonSyntaxException {
+        final Type listOfPopularEntityType = new TypeToken<BaseEntity<MovieEntity>>() {
+        }.getType();
+        return this.gson.fromJson(movieListJsonResponse, listOfPopularEntityType);
     }
 }

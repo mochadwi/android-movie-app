@@ -2,62 +2,55 @@ package io.mochadwi.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Movie Entity used in the data layer.
- */
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import lombok.Data;
+
+@Data
+@Generated("com.robohorse.robopojogenerator")
 public class MovieEntity {
 
-    @SerializedName("cover_url")
-    private String coverUrl;
+    @SerializedName("adult")
+    private boolean adult;
 
-    @SerializedName("description")
-    private String description;
+    @SerializedName("backdrop_path")
+    private String backdropPath;
 
-    @SerializedName("email")
-    private String email;
-
-    @SerializedName("followers")
-    private int followers;
-
-    @SerializedName("full_name")
-    private String fullname;
+    @SerializedName("genre_ids")
+    private List<Integer> genreIds;
 
     @SerializedName("id")
-    private int movieId;
+    private int id;
 
-    public MovieEntity() {
-        //empty
-    }
+    @SerializedName("original_language")
+    private String originalLanguage;
 
-    public int getMovieId() {
-        return movieId;
-    }
+    @SerializedName("original_title")
+    private String originalTitle;
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
+    @SerializedName("overview")
+    private String overview;
 
-    public String getCoverUrl() {
-        return coverUrl;
-    }
+    @SerializedName("popularity")
+    private double popularity;
 
-    public String getFullname() {
-        return fullname;
-    }
+    @SerializedName("poster_path")
+    private String posterPath;
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+    @SerializedName("release_date")
+    private String releaseDate;
 
-    public String getDescription() {
-        return description;
-    }
+    @SerializedName("title")
+    private String title;
 
-    public int getFollowers() {
-        return followers;
-    }
+    @SerializedName("video")
+    private boolean video;
 
-    public String getEmail() {
-        return email;
-    }
+    @SerializedName("vote_average")
+    private double voteAverage;
+
+    @SerializedName("vote_count")
+    private int voteCount;
 }

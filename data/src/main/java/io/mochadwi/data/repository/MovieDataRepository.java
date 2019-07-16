@@ -43,6 +43,12 @@ public class MovieDataRepository implements MovieRepository {
     }
 
     @Override
+    public Observable<List<Movie>> populars() {
+        final MovieDataStore movieDataStore = this.movieDataStoreFactory.createCloudDataStore();
+        return movieDataStore.popularList().map(this.movieEntityDataMapper::transform);
+    }
+
+    @Override
     public Observable<Movie> movie(int movieId) {
         final MovieDataStore movieDataStore = this.movieDataStoreFactory.create(movieId);
         return movieDataStore.movieEntityDetails(movieId)

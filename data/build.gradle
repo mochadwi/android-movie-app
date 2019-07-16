@@ -52,6 +52,8 @@ dependencies {
     implementation dataDependencies.rxJava
     implementation dataDependencies.rxAndroid
     implementation dataDependencies.androidAnnotations
+    compileOnly presentationDependencies.lombok
+    annotationProcessor presentationDependencies.lombok
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.assertj

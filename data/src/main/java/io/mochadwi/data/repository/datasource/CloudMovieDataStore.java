@@ -3,6 +3,7 @@ package io.mochadwi.data.repository.datasource;
 import java.util.List;
 
 import io.mochadwi.data.cache.MovieCache;
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 import io.mochadwi.data.net.RestApi;
 import io.mochadwi.data.net.RestApiMovie;
@@ -31,6 +32,11 @@ class CloudMovieDataStore implements MovieDataStore {
     @Override
     public Observable<List<MovieEntity>> movieEntityList() {
         return this.restApi.movieEntityList();
+    }
+
+    @Override
+    public Observable<BaseEntity<MovieEntity>> popularList() {
+        return this.restApi.popularList();
     }
 
     @Override
