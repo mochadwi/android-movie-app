@@ -50,6 +50,6 @@ public class MovieListActivity extends BaseActivity implements HasComponent<Movi
 
     @Override
     public void onMovieClicked(MovieModel movieModel) {
-        this.navigator.navigateToUserDetails(this, movieModel.getMovieId());
+        this.navigator.navigateToUserDetails(this, movieModel.getId());
     }
 }

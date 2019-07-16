@@ -45,7 +45,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     @Override
     public void onBindViewHolder(MovieViewHolder holder, final int position) {
         final MovieModel movieModel = this.moviesCollection.get(position);
-        holder.textViewTitle.setText(movieModel.getFullName());
+        holder.textViewTitle.setText(movieModel.getOriginalTitle());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

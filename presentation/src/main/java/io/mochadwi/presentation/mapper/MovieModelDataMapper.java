@@ -52,13 +52,12 @@ public class MovieModelDataMapper {
         if (movie == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        final MovieModel movieModel = new MovieModel(movie.getMovieId());
-        movieModel.setCoverUrl(movie.getCoverUrl());
-        movieModel.setFullName(movie.getFullName());
-        movieModel.setEmail(movie.getEmail());
-        movieModel.setDescription(movie.getDescription());
-        movieModel.setFollowers(movie.getFollowers());
-
-        return movieModel;
+        return new MovieModel(movie.isAdult(), movie.getBackdropPath(),
+            movie.getGenreIds(),
+            movie.getId(), movie.getOriginalLanguage(),
+            movie.getOriginalTitle(),
+            movie.getOverview(), movie.getPopularity(), movie.getPosterPath(),
+            movie.getReleaseDate(), movie.getTitle(), movie.isVideo(),
+            movie.getVoteAverage(), movie.getVoteCount());
     }
 }

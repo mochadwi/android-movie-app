@@ -22,14 +22,17 @@
     </activity>
 
     <activity
+        android:screenOrientation="portrait"
+        android:name=".view.activity.MovieListActivity"
+        android:label="@string/activity_title_movie_list"/>
+
+    <activity
         android:name=".view.activity.UserListActivity"
-        android:label="@string/activity_title_user_list">
-    </activity>
+        android:label="@string/activity_title_user_list"/>
 
     <activity
         android:name=".view.activity.UserDetailsActivity"
-        android:label="@string/activity_title_user_details">
-    </activity>
+        android:label="@string/activity_title_user_details"/>
   </application>
 
 </manifest>

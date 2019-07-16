@@ -15,7 +15,8 @@ public interface RestApiMovie {
         "https://api.themoviedb.org/3/";
 
     /** Api url for getting all movies */
-    String API_URL_GET_MOVIE_POPULAR_LIST = API_BASE_URL + "movie/popular";
+    String API_URL_GET_MOVIE_POPULAR_LIST = API_BASE_URL + "movie/popular?api_key" +
+        "=334879b2c8dc36a9f2c64f7bd4f0c91d";
 
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link MovieEntity}.

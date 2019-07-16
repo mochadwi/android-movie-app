@@ -12,6 +12,7 @@ import io.mochadwi.domain.exception.DefaultErrorBundle;
 import io.mochadwi.domain.exception.ErrorBundle;
 import io.mochadwi.domain.interactor.DefaultObserver;
 import io.mochadwi.domain.interactor.GetMovieList;
+import io.mochadwi.domain.interactor.GetPopularList;
 import io.mochadwi.presentation.exception.ErrorMessageFactory;
 import io.mochadwi.presentation.internal.di.PerActivity;
 import io.mochadwi.presentation.mapper.MovieModelDataMapper;
@@ -27,14 +28,18 @@ public class MovieListPresenter implements Presenter {
 
     private final GetMovieList getMovieListUseCase;
 
+    private final GetPopularList getPopularListListUseCase;
+
     private final MovieModelDataMapper movieModelDataMapper;
 
     private MovieListView viewListView;
 
     @Inject
     public MovieListPresenter(GetMovieList getMovieListMovieCase,
+        GetPopularList getPopularListListUseCase,
         MovieModelDataMapper movieModelDataMapper) {
         this.getMovieListUseCase = getMovieListMovieCase;
+        this.getPopularListListUseCase = getPopularListListUseCase;
         this.movieModelDataMapper = movieModelDataMapper;
     }
 
@@ -53,6 +58,7 @@ public class MovieListPresenter implements Presenter {
     @Override
     public void destroy() {
         this.getMovieListUseCase.dispose();
+        this.getPopularListListUseCase.dispose();
         this.viewListView = null;
     }
 
@@ -69,8 +75,9 @@ public class MovieListPresenter implements Presenter {
     private void loadMovieList() {
         this.hideViewRetry();
         this.showViewLoading();
-        this.getMovieList();
+        this.getPopularList();
     }
+
 
     private void hideViewRetry() {
         this.viewListView.hideRetry();
@@ -78,6 +85,10 @@ public class MovieListPresenter implements Presenter {
 
     private void showViewLoading() {
         this.viewListView.showLoading();
+    }
+
+    private void getPopularList() {
+        this.getPopularListListUseCase.execute(new MovieListObserver(), null);
     }
 
     private void getMovieList() {

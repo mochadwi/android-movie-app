@@ -2,6 +2,7 @@ package io.mochadwi.presentation.view.activity;
 
 import android.os.Bundle;
 import android.widget.Button;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,7 +26,7 @@ public class MainActivity extends BaseActivity {
    * Goes to the user list screen.
    */
   @OnClick(R.id.btn_LoadData)
-  void navigateToUserList() {
-    this.navigator.navigateToUserList(this);
+  void navigateToMovieList() {
+    this.navigator.navigateToMovieList(this);
   }
 }

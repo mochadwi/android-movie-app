@@ -75,10 +75,10 @@ dependencies {
   implementation presentationDependencies.rxJava
   implementation presentationDependencies.rxAndroid
   compileOnly presentationDependencies.javaxAnnotation
-  compileOnly presentationDependencies.lombok
-  annotationProcessor presentationDependencies.lombok
   implementation presentationDependencies.parceler
   annotationProcessor presentationDependencies.parcelerCompiler
+  compileOnly presentationDependencies.lombok
+  annotationProcessor presentationDependencies.lombok
 
   androidTestImplementation presentationTestDependencies.mockito
   androidTestImplementation presentationTestDependencies.dexmaker

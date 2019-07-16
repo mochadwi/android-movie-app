@@ -39,26 +39,26 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     @Bind(R.id.rl_retry)
     RelativeLayout rl_retry;
 
-    @Bind(R.id.rv_users)
-    RecyclerView rv_users;
+    @Inject
+    MovieListPresenter movieListPresenter;
 
     @Inject
-    MovieListPresenter userListPresenter;
+    MoviesAdapter moviesAdapter;
 
-    @Inject
-    MoviesAdapter usersAdapter;
+    @Bind(R.id.rv_movies)
+    RecyclerView rv_movies;
+
+    private MovieListListener movieListListener;
 
     private MoviesAdapter.OnItemClickListener onItemClickListener =
         new MoviesAdapter.OnItemClickListener() {
             @Override
-            public void onMovieItemClicked(MovieModel userModel) {
-                if (MovieListFragment.this.userListPresenter != null && userModel != null) {
-                    MovieListFragment.this.userListPresenter.onMovieClicked(userModel);
+            public void onMovieItemClicked(MovieModel movieModel) {
+                if (MovieListFragment.this.movieListPresenter != null && movieModel != null) {
+                    MovieListFragment.this.movieListPresenter.onMovieClicked(movieModel);
                 }
             }
         };
-
-    private MovieListListener userListListener;
 
     public MovieListFragment() {
         setRetainInstance(true);
@@ -68,7 +68,7 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (activity instanceof MovieListListener) {
-            this.userListListener = (MovieListListener) activity;
+            this.movieListListener = (MovieListListener) activity;
         }
     }
 
@@ -81,7 +81,7 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-        final View fragmentView = inflater.inflate(R.layout.fragment_user_list, container, false);
+        final View fragmentView = inflater.inflate(R.layout.fragment_movie_list, container, false);
         ButterKnife.bind(this, fragmentView);
         setupRecyclerView();
         return fragmentView;
@@ -90,7 +90,7 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.userListPresenter.setView(this);
+        this.movieListPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadMovieList();
         }
@@ -99,45 +99,45 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     @Override
     public void onResume() {
         super.onResume();
-        this.userListPresenter.resume();
+        this.movieListPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.userListPresenter.pause();
+        this.movieListPresenter.pause();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        rv_users.setAdapter(null);
+        rv_movies.setAdapter(null);
         ButterKnife.unbind(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.userListPresenter.destroy();
+        this.movieListPresenter.destroy();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        this.userListListener = null;
+        this.movieListListener = null;
     }
 
     /**
-     * Loads all users.
+     * Loads all movies.
      */
     private void loadMovieList() {
-        this.userListPresenter.initialize();
+        this.movieListPresenter.initialize();
     }
 
     private void setupRecyclerView() {
-        this.usersAdapter.setOnItemClickListener(onItemClickListener);
-        this.rv_users.setLayoutManager(new LinearLayoutManager(context()));
-        this.rv_users.setAdapter(usersAdapter);
+        this.moviesAdapter.setOnItemClickListener(onItemClickListener);
+        this.rv_movies.setLayoutManager(new LinearLayoutManager(context()));
+        this.rv_movies.setAdapter(moviesAdapter);
     }
 
     @Override
@@ -173,16 +173,16 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     }
 
     @Override
-    public void renderMovieList(Collection<MovieModel> userModelCollection) {
-        if (userModelCollection != null) {
-            this.usersAdapter.setMoviesCollection(userModelCollection);
+    public void renderMovieList(Collection<MovieModel> movieModelCollection) {
+        if (movieModelCollection != null) {
+            this.moviesAdapter.setMoviesCollection(movieModelCollection);
         }
     }
 
     @Override
-    public void viewMovie(MovieModel userModel) {
-        if (this.userListListener != null) {
-            this.userListListener.onMovieClicked(userModel);
+    public void viewMovie(MovieModel movieModel) {
+        if (this.movieListListener != null) {
+            this.movieListListener.onMovieClicked(movieModel);
         }
     }
 
@@ -192,10 +192,10 @@ public class MovieListFragment extends BaseFragment implements MovieListView {
     }
 
     /**
-     * Interface for listening user list events.
+     * Interface for listening movie list events.
      */
     public interface MovieListListener {
 
-        void onMovieClicked(final MovieModel userModel);
+        void onMovieClicked(final MovieModel movieModel);
     }
 }
