@@ -65,13 +65,17 @@ dependencies {
   compile project(':domain')
   compile project(':data')
 
-  apt presentationDependencies.daggerCompiler
+  annotationProcessor presentationDependencies.daggerCompiler
   compile presentationDependencies.dagger
   compile presentationDependencies.butterKnife
   compile presentationDependencies.recyclerView
   compile presentationDependencies.rxJava
   compile presentationDependencies.rxAndroid
   provided presentationDependencies.javaxAnnotation
+  provided presentationDependencies.lombok
+  annotationProcessor presentationDependencies.lombok
+  compile presentationDependencies.parceler
+  annotationProcessor presentationDependencies.parcelerCompiler
 
   androidTestCompile presentationTestDependencies.mockito
   androidTestCompile presentationTestDependencies.dexmaker
