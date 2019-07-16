@@ -1,13 +1,16 @@
 package io.mochadwi.presentation.internal.di.components;
 
 import android.content.Context;
+
+import javax.inject.Singleton;
+
+import dagger.Component;
 import io.mochadwi.domain.executor.PostExecutionThread;
 import io.mochadwi.domain.executor.ThreadExecutor;
+import io.mochadwi.domain.repository.MovieRepository;
 import io.mochadwi.domain.repository.UserRepository;
 import io.mochadwi.presentation.internal.di.modules.ApplicationModule;
 import io.mochadwi.presentation.view.activity.BaseActivity;
-import dagger.Component;
-import javax.inject.Singleton;
 
 /**
  * A component whose lifetime is the life of the application.
@@ -22,4 +25,6 @@ public interface ApplicationComponent {
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
   UserRepository userRepository();
+
+    MovieRepository movieRepository();
 }
