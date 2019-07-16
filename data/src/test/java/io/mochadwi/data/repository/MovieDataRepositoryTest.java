@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 import io.mochadwi.data.entity.mapper.MovieEntityDataMapper;
 import io.mochadwi.data.repository.datasource.MovieDataStore;
@@ -71,5 +72,16 @@ public class MovieDataRepositoryTest {
 
         verify(mockMovieDataStoreFactory).create(FAKE_USER_ID);
         verify(mockMovieDataStore).movieEntityDetails(FAKE_USER_ID);
+    }
+
+    @Test
+    public void testGetPopularMoviesHappyCase() {
+        BaseEntity<MovieEntity> moviesList = new BaseEntity<MovieEntity>();
+        given(mockMovieDataStore.popularList()).willReturn(Observable.just(moviesList));
+
+        movieDataRepository.populars();
+
+        verify(mockMovieDataStoreFactory).createCloudDataStore();
+        verify(mockMovieDataStore).popularList();
     }
 }

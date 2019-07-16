@@ -37,6 +37,12 @@ public class DiskMovieDataStoreTest {
     }
 
     @Test
+    public void testGetPopularEntityListUnsupported() {
+        expectedException.expect(UnsupportedOperationException.class);
+        diskMovieDataStore.popularList();
+    }
+
+    @Test
     public void testGetMovieEntityDetailesFromCache() {
         diskMovieDataStore.movieEntityDetails(FAKE_USER_ID);
         verify(mockMovieCache).get(FAKE_USER_ID);

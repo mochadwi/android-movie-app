@@ -39,6 +39,12 @@ public class CloudMovieDataStoreTest {
     }
 
     @Test
+    public void testGetPopularEntityListFromApi() {
+        cloudMovieDataStore.popularList();
+        verify(mockRestApi).popularList();
+    }
+
+    @Test
     public void testGetMovieEntityDetailsFromApi() {
         MovieEntity fakeMovieEntity = new MovieEntity();
         Observable<MovieEntity> fakeObservable = Observable.just(fakeMovieEntity);

@@ -37,14 +37,14 @@ public class MovieEntityDataMapperTest {
         Movie movie = movieEntityDataMapper.transform(movieEntity);
 
         assertThat(movie, is(instanceOf(Movie.class)));
-        assertThat(movie.getMovieId(), is(FAKE_USER_ID));
-        assertThat(movie.getFullName(), is(FAKE_FULLNAME));
+        assertThat(movie.getId(), is(FAKE_USER_ID));
+        assertThat(movie.getOriginalTitle(), is(FAKE_FULLNAME));
     }
 
     private MovieEntity createFakeMovieEntity() {
         MovieEntity movieEntity = new MovieEntity();
-        movieEntity.setMovieId(FAKE_USER_ID);
-        movieEntity.setFullname(FAKE_FULLNAME);
+        movieEntity.setId(FAKE_USER_ID);
+        movieEntity.setOriginalTitle(FAKE_FULLNAME);
 
         return movieEntity;
     }
