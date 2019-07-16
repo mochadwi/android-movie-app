@@ -1,16 +1,32 @@
 package io.mochadwi.test.view.activity;
 
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import android.app.Fragment;
 import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
+import android.support.test.filters.LargeTest;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
 import io.mochadwi.presentation.R;
 import io.mochadwi.presentation.view.activity.UserListActivity;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UserListActivityTest extends ActivityInstrumentationTestCase2<UserListActivity> {
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class UserListActivityTest extends ActivityTestRule<UserListActivity> {
+
+    @Rule
+    public ActivityTestRule<UserListActivity> activityRule = new ActivityTestRule<>(
+        UserListActivity.class
+    );
 
   private UserListActivity userListActivity;
 
@@ -18,32 +34,30 @@ public class UserListActivityTest extends ActivityInstrumentationTestCase2<UserL
     super(UserListActivity.class);
   }
 
-  @Override protected void setUp() throws Exception {
-    super.setUp();
-    this.setActivityIntent(createTargetIntent());
+    @Before
+    public void setUp() throws Exception {
+        this.launchActivity(createTargetIntent());
     userListActivity = getActivity();
   }
 
-  @Override protected void tearDown() throws Exception {
-    super.tearDown();
+    private Intent createTargetIntent() {
+        Intent intentLaunchActivity =
+            UserListActivity.getCallingIntent(getInstrumentation().getTargetContext());
+
+        return intentLaunchActivity;
   }
 
-  public void testContainsUserListFragment() {
-    Fragment userListFragment =
-        userListActivity.getFragmentManager().findFragmentById(R.id.fragmentContainer);
-    assertThat(userListFragment, is(notNullValue()));
-  }
+    @Test
+    public void testContainsUserListFragment() {
+        Fragment userListFragment =
+            userListActivity.getFragmentManager().findFragmentById(R.id.fragmentContainer);
+        assertThat(userListFragment, is(notNullValue()));
+    }
 
-  public void testContainsProperTitle() {
-    String actualTitle = this.userListActivity.getTitle().toString().trim();
+    @Test
+    public void testContainsProperTitle() {
+        String actualTitle = this.userListActivity.getTitle().toString().trim();
 
-    assertThat(actualTitle, is("Users List"));
-  }
-
-  private Intent createTargetIntent() {
-    Intent intentLaunchActivity =
-        UserListActivity.getCallingIntent(getInstrumentation().getTargetContext());
-
-    return intentLaunchActivity;
-  }
+        assertThat(actualTitle, is("Users List"));
+    }
 }

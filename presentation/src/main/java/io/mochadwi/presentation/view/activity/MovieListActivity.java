@@ -7,18 +7,18 @@ import android.view.Window;
 
 import io.mochadwi.presentation.R;
 import io.mochadwi.presentation.internal.di.HasComponent;
-import io.mochadwi.presentation.internal.di.components.DaggerUserComponent;
-import io.mochadwi.presentation.internal.di.components.UserComponent;
-import io.mochadwi.presentation.model.UserModel;
-import io.mochadwi.presentation.view.fragment.UserListFragment;
+import io.mochadwi.presentation.internal.di.components.DaggerMovieComponent;
+import io.mochadwi.presentation.internal.di.components.MovieComponent;
+import io.mochadwi.presentation.model.MovieModel;
+import io.mochadwi.presentation.view.fragment.MovieListFragment;
 
 /**
  * Activity that shows a list of Movies.
  */
-public class MovieListActivity extends BaseActivity implements HasComponent<UserComponent>,
-    UserListFragment.UserListListener {
+public class MovieListActivity extends BaseActivity implements HasComponent<MovieComponent>,
+    MovieListFragment.MovieListListener {
 
-    private UserComponent userComponent;
+    private MovieComponent movieComponent;
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, MovieListActivity.class);
@@ -32,24 +32,24 @@ public class MovieListActivity extends BaseActivity implements HasComponent<User
 
         this.initializeInjector();
         if (savedInstanceState == null) {
-            addFragment(R.id.fragmentContainer, new UserListFragment());
+            addFragment(R.id.fragmentContainer, new MovieListFragment());
         }
     }
 
     private void initializeInjector() {
-        this.userComponent = DaggerUserComponent.builder()
+        this.movieComponent = DaggerMovieComponent.builder()
             .applicationComponent(getApplicationComponent())
             .activityModule(getActivityModule())
             .build();
     }
 
     @Override
-    public UserComponent getComponent() {
-        return userComponent;
+    public MovieComponent getComponent() {
+        return movieComponent;
     }
 
     @Override
-    public void onUserClicked(UserModel userModel) {
-        this.navigator.navigateToUserDetails(this, userModel.getUserId());
+    public void onMovieClicked(MovieModel movieModel) {
+        this.navigator.navigateToUserDetails(this, movieModel.getMovieId());
     }
 }
