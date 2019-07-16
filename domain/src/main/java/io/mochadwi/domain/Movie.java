@@ -1,67 +1,170 @@
 package io.mochadwi.domain;
 
-/**
- * Class that represents a Movie in the domain layer.
- */
+import java.util.List;
+
 public class Movie {
 
-    private final int movieId;
+    private boolean adult;
 
-    private String coverUrl;
+    private String backdropPath;
 
-    private String description;
+    private List<Integer> genreIds;
 
-    private String email;
+    private int id;
 
-    private int followers;
+    private String originalLanguage;
 
-    private String fullName;
+    private String originalTitle;
 
-    public Movie(int movieId) {
-        this.movieId = movieId;
+    private String overview;
+
+    private double popularity;
+
+    private String posterPath;
+
+    private String releaseDate;
+
+    private String title;
+
+    private boolean video;
+
+    private double voteAverage;
+
+    private int voteCount;
+
+    public Movie(int id) {
+        this.id = id;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public Movie(boolean adult, String backdropPath, List<Integer> genreIds, int id,
+        String originalLanguage, String originalTitle, String overview, double popularity,
+        String posterPath, String releaseDate, String title, boolean video, double voteAverage,
+        int voteCount) {
+        this.adult = adult;
+        this.backdropPath = backdropPath;
+        this.genreIds = genreIds;
+        this.id = id;
+        this.originalLanguage = originalLanguage;
+        this.originalTitle = originalTitle;
+        this.overview = overview;
+        this.popularity = popularity;
+        this.posterPath = posterPath;
+        this.releaseDate = releaseDate;
+        this.title = title;
+        this.video = video;
+        this.voteAverage = voteAverage;
+        this.voteCount = voteCount;
     }
 
-    public String getCoverUrl() {
-        return coverUrl;
+    public boolean isAdult() {
+        return adult;
     }
 
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
+    public void setAdult(boolean adult) {
+        this.adult = adult;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Integer> getGenreIds() {
+        return genreIds;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
     }
 
-    public String getDescription() {
-        return description;
+    public int getId() {
+        return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getFollowers() {
-        return followers;
+    public String getOriginalLanguage() {
+        return originalLanguage;
     }
 
-    public void setFollowers(int followers) {
-        this.followers = followers;
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(double popularity) {
+        this.popularity = popularity;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isVideo() {
+        return video;
+    }
+
+    public void setVideo(boolean video) {
+        this.video = video;
+    }
+
+    public double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
     }
 }

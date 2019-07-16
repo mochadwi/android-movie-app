@@ -15,9 +15,9 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetMovieListTest {
+public class GetPopularListTest {
 
-    private GetMovieList getMovieList;
+    private GetPopularList getMovieList;
 
     @Mock
     private MovieRepository mockMovieRepository;
@@ -30,15 +30,15 @@ public class GetMovieListTest {
 
     @Before
     public void setUp() {
-        getMovieList = new GetMovieList(mockMovieRepository, mockThreadExecutor,
+        getMovieList = new GetPopularList(mockMovieRepository, mockThreadExecutor,
             mockPostExecutionThread);
     }
 
     @Test
-    public void testGetMovieListUseCaseObservableHappyCase() {
+    public void testGetPopularListUseCaseObservableHappyCase() {
         getMovieList.buildUseCaseObservable(null);
 
-        verify(mockMovieRepository).movies();
+        verify(mockMovieRepository).populars();
         verifyNoMoreInteractions(mockMovieRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockPostExecutionThread);

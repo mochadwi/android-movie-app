@@ -16,6 +16,11 @@ public interface MovieRepository {
     Observable<List<Movie>> movies();
 
     /**
+     * Get an {@link Observable} which will emit a List of {@link Movie}.
+     */
+    Observable<List<Movie>> populars();
+
+    /**
      * Get an {@link Observable} which will emit a {@link Movie}.
      *
      * @param movieId The movie id used to retrieve movie data.
