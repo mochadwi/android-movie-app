@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.mochadwi.data.cache.MovieCache;
-import io.mochadwi.data.entity.mapper.MovieEntityJsonMapper;
-import io.mochadwi.data.net.RestApiMovie;
-import io.mochadwi.data.net.RestApiMovieImpl;
+import io.mochadwi.data.net.RetrofitMovie;
+import io.mochadwi.data.net.RetrofitMovieImpl;
 
 /**
  * Factory that creates different implementations of {@link MovieDataStore}.
@@ -46,8 +45,7 @@ public class MovieDataStoreFactory {
      * Create {@link MovieDataStore} to retrieve data from the Cloud.
      */
     public MovieDataStore createCloudDataStore() {
-        final MovieEntityJsonMapper movieEntityJsonMapper = new MovieEntityJsonMapper();
-        final RestApiMovie restApi = new RestApiMovieImpl(this.context, movieEntityJsonMapper);
+        final RetrofitMovie restApi = new RetrofitMovieImpl(this.context);
 
         return new CloudMovieDataStore(restApi, this.movieCache);
     }

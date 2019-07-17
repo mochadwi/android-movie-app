@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.mochadwi.data.cache.MovieCache;
 import io.mochadwi.data.entity.MovieEntity;
 import io.mochadwi.data.net.RestApiMovie;
+import io.mochadwi.data.net.RetrofitMovie;
 import io.reactivex.Observable;
 
 import static org.mockito.BDDMockito.given;
@@ -27,31 +28,34 @@ public class CloudMovieDataStoreTest {
     @Mock
     private RestApiMovie mockRestApi;
 
+    @Mock
+    private RetrofitMovie mockRetrofitMovie;
+
     @Before
     public void setUp() {
-        cloudMovieDataStore = new CloudMovieDataStore(mockRestApi, mockMovieCache);
+        cloudMovieDataStore = new CloudMovieDataStore(mockRetrofitMovie, mockMovieCache);
     }
 
     @Test
     public void testGetMovieEntityListFromApi() {
         cloudMovieDataStore.movieEntityList();
-        verify(mockRestApi).movieEntityList();
+        verify(mockRetrofitMovie).movieEntityList();
     }
 
     @Test
     public void testGetPopularEntityListFromApi() {
         cloudMovieDataStore.popularList();
-        verify(mockRestApi).popularList();
+        verify(mockRetrofitMovie).popularList();
     }
 
     @Test
     public void testGetMovieEntityDetailsFromApi() {
         MovieEntity fakeMovieEntity = new MovieEntity();
         Observable<MovieEntity> fakeObservable = Observable.just(fakeMovieEntity);
-        given(mockRestApi.movieEntityById(FAKE_USER_ID)).willReturn(fakeObservable);
+        given(mockRetrofitMovie.movieEntityById(FAKE_USER_ID)).willReturn(fakeObservable);
 
         cloudMovieDataStore.movieEntityDetails(FAKE_USER_ID);
 
-        verify(mockRestApi).movieEntityById(FAKE_USER_ID);
+        verify(mockRetrofitMovie).movieEntityById(FAKE_USER_ID);
     }
 }

@@ -5,18 +5,15 @@ import java.util.List;
 import io.mochadwi.data.entity.BaseEntity;
 import io.mochadwi.data.entity.MovieEntity;
 import io.reactivex.Observable;
+import retrofit2.http.GET;
 
 /**
  * RestApi for retrieving data from the network.
  */
-public interface RestApiMovie {
-
-    // TODO(mochamadiqbaldwicahyo): 2019-07-17 Move this to buildConfigField gradle build
-    String API_BASE_URL =
-        "https://api.themoviedb.org/3/";
+public interface RetrofitMovie {
 
     /** Api url for getting all movies */
-    String API_URL_GET_MOVIE_POPULAR_LIST = API_BASE_URL + "movie/popular?api_key" +
+    String API_URL_GET_MOVIE_POPULAR_LIST = "movie/popular?api_key" +
         "=334879b2c8dc36a9f2c64f7bd4f0c91d";
 
     /**
@@ -27,8 +24,9 @@ public interface RestApiMovie {
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link MovieEntity}.
      */
+    @GET(API_URL_GET_MOVIE_POPULAR_LIST)
     Observable<BaseEntity<MovieEntity>> popularList();
-    
+
     /**
      * Retrieves an {@link Observable} which will emit a {@link MovieEntity}.
      *
