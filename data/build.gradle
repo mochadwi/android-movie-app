@@ -50,6 +50,7 @@ dependencies {
     implementation dataDependencies.okHttp
     implementation dataDependencies.okHttp3
     implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitGson
     implementation dataDependencies.retrofitRx
     implementation dataDependencies.gson
     implementation dataDependencies.rxJava
