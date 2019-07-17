@@ -25,6 +25,7 @@ ext {
   arrowVersion = '1.0.0'
   lombokVersion = '1.18.8'
   parcelerVersion = '1.1.12'
+  retrofitVersion = '2.4.0'
 
   //Testing
   robolectricVersion = '3.1.1'
@@ -79,6 +80,8 @@ ext {
           daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
           dagger            : "com.google.dagger:dagger:${daggerVersion}",
           okHttp            : "com.squareup.okhttp:okhttp:${okHttpVersion}",
+          retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+          retrofitScalars   : "com.squareup.retrofit2:converter-scalars:${retrofitVersion}",
           gson              : "com.google.code.gson:gson:${gsonVersion}",
           rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
           rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
