@@ -48,7 +48,9 @@ dependencies {
     compileOnly dataDependencies.javaxAnnotation
     implementation dataDependencies.javaxInject
     implementation dataDependencies.okHttp
+    implementation dataDependencies.okHttp3
     implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitRx
     implementation dataDependencies.gson
     implementation dataDependencies.rxJava
     implementation dataDependencies.rxAndroid
